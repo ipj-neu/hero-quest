@@ -1,7 +1,7 @@
 import json, logging, boto3, string, secrets
 from botocore.exceptions import ClientError
 
-# TODO i fucking did it. i can finally refactor this fucking garbage into fucking layer. 4 fucking hours. just to need to add a folder. just fuck
+# TODO i fucking did it. i can finally refactor this fucking garbage into fucking layer. 4 fucking hours. just to need to add a folder. just fuck. i am so dumb
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
