@@ -1,0 +1,14 @@
+{
+  "name": "heroquest",
+  "version": "1.0.0",
+  "description": "An app for Hero Quest",
+  "author": "Isaac Johnson",
+  "devDependencies": {
+    "@serverless/compose": "^1.3.0",
+    "serverless-dotenv-plugin": "^6.0.0",
+    "serverless-python-requirements": "^6.0.0"
+  },
+  "dependencies": {
+    "serverless": "^3.33.0"
+  }
+}
