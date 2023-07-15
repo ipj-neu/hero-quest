@@ -84,7 +84,6 @@ class WssDm():
 
 # TODO add checks to make sure that all the endpoint that send a response can get a session_id in the body
 def main(event, context):
-    testing()
     route_key = event.get("requestContext", {}).get("routeKey")
     body:dict = json.loads(event.get("body", {}))
     handler = WssDm(event, body)
