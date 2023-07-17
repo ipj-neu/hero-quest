@@ -1,5 +1,6 @@
 import json, logging, boto3, string, secrets
 from botocore.exceptions import ClientError
+import util
 
 # TODO i fucking did it. i can finally refactor this fucking garbage into fucking layer. 4 fucking hours. just to need to add a folder. just fuck. i am so dumb
 
@@ -84,7 +85,6 @@ class WssDm():
 
 # TODO add checks to make sure that all the endpoint that send a response can get a session_id in the body
 def main(event, context):
-    testing()
     route_key = event.get("requestContext", {}).get("routeKey")
     body:dict = json.loads(event.get("body", {}))
     handler = WssDm(event, body)

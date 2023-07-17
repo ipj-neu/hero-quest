@@ -59,26 +59,66 @@ resources:
 
 layers:
   modules:
-    path: modules/testing
+    path: modules/sessions
     compatibleRuntimes:
       - python3.10
 
+
+# TODO this need to be updated completely to reflect refactoring
 functions:
-  wws:
-    name: ${sls:stage}-session-wss
-    handler: lambdas/wss.main
+#   wws:
+#     name: ${sls:stage}-session-wss
+#     handler: lambdas/wss.main
+#     layers:
+#       # - { Ref: PythonRequirementsLambdaLayer }
+#       - Ref: ModulesLambdaLayer
+#     package:
+#       patterns:
+#         - "!lambdas/**" 
+#         - "lambdas/wss.py"
+#     events:
+#       - websocket:
+#           route: createSession
+#       - websocket:
+#           route: joinSession
+#       - websocket:
+#           route: updateDm
+  createSession:
+    name: ${sls:stage}-create-session
+    handler: lambdas/wss/create-session.handler
     layers:
-      # - { Ref: PythonRequirementsLambdaLayer }
       - Ref: ModulesLambdaLayer
     package:
       patterns:
-        - "!lambdas/**" 
-        - "lambdas/wss.py"
+        - "!lambdas/**"
+        - "lambdas/wss/create-session.py"
     events:
       - websocket:
           route: createSession
+    
+  joinSession:
+    name: ${sls:stage}-join-session
+    handler: lambdas/wss/join-session.handler
+    layers:
+      - Ref: ModulesLambdaLayer
+    package:
+      patterns:
+        - "!lambdas/**"
+        - "lambdas/wss/join-session.py"
+    events:
       - websocket:
           route: joinSession
+    
+  updateDm:
+    name: ${sls:stage}-update-dm
+    handler: lambdas/wss/update-dm.handler
+    layers:
+      - Ref: ModulesLambdaLayer
+    package:
+      patterns:
+        - "!lambdas/**"
+        - "lambdas/wss/update-dm.py"
+    events:
       - websocket:
           route: updateDm
 
