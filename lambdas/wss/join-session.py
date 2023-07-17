@@ -9,7 +9,7 @@ def handler(event, context):
     session_code = loads(event.get("body", {})).get("sessionCode", None)
 
     valid, _ = get_session(session_code, session_tbl)
-    if not valid: return 404
+    if not valid: return {"statusCode": 404}
     try:
         session_tbl.update_item(
             Key={"sessionCode": session_code},

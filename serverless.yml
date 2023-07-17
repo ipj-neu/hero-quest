@@ -64,25 +64,7 @@ layers:
       - python3.10
 
 
-# TODO this need to be updated completely to reflect refactoring
 functions:
-#   wws:
-#     name: ${sls:stage}-session-wss
-#     handler: lambdas/wss.main
-#     layers:
-#       # - { Ref: PythonRequirementsLambdaLayer }
-#       - Ref: ModulesLambdaLayer
-#     package:
-#       patterns:
-#         - "!lambdas/**" 
-#         - "lambdas/wss.py"
-#     events:
-#       - websocket:
-#           route: createSession
-#       - websocket:
-#           route: joinSession
-#       - websocket:
-#           route: updateDm
   createSession:
     name: ${sls:stage}-create-session
     handler: lambdas/wss/create-session.handler
@@ -121,20 +103,6 @@ functions:
     events:
       - websocket:
           route: updateDm
-
-  # api:
-  #   name: ${sls:stage}-session-api
-  #   handler: lambdas/api.main
-  #   layers:
-  #     - Ref: PythonRequirementsLambdaLayer
-  #   package:
-  #     patterns:
-  #       - "!lambdas/**"
-  #       - "lambdas/api.py"
-  #   events:
-  #     - httpApi:
-  #         method: POST
-  #         path: "/${sls:stage}/session"
 
 custom:
   pythonRequirements:
