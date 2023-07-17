@@ -59,42 +59,50 @@ resources:
 
 layers:
   modules:
-    path: modules/testing
+    path: modules/sessions
     compatibleRuntimes:
       - python3.10
 
+
 functions:
-  wws:
-    name: ${sls:stage}-session-wss
-    handler: lambdas/wss.main
+  createSession:
+    name: ${sls:stage}-create-session
+    handler: lambdas/wss/create-session.handler
     layers:
-      # - { Ref: PythonRequirementsLambdaLayer }
       - Ref: ModulesLambdaLayer
     package:
       patterns:
-        - "!lambdas/**" 
-        - "lambdas/wss.py"
+        - "!lambdas/**"
+        - "lambdas/wss/create-session.py"
     events:
       - websocket:
           route: createSession
+    
+  joinSession:
+    name: ${sls:stage}-join-session
+    handler: lambdas/wss/join-session.handler
+    layers:
+      - Ref: ModulesLambdaLayer
+    package:
+      patterns:
+        - "!lambdas/**"
+        - "lambdas/wss/join-session.py"
+    events:
       - websocket:
           route: joinSession
+    
+  updateDm:
+    name: ${sls:stage}-update-dm
+    handler: lambdas/wss/update-dm.handler
+    layers:
+      - Ref: ModulesLambdaLayer
+    package:
+      patterns:
+        - "!lambdas/**"
+        - "lambdas/wss/update-dm.py"
+    events:
       - websocket:
           route: updateDm
-
-  # api:
-  #   name: ${sls:stage}-session-api
-  #   handler: lambdas/api.main
-  #   layers:
-  #     - Ref: PythonRequirementsLambdaLayer
-  #   package:
-  #     patterns:
-  #       - "!lambdas/**"
-  #       - "lambdas/api.py"
-  #   events:
-  #     - httpApi:
-  #         method: POST
-  #         path: "/${sls:stage}/session"
 
 custom:
   pythonRequirements:
