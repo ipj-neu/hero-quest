@@ -1,4 +1,4 @@
-import string, secrets, logging
+import string, secrets
 from botocore.exceptions import ClientError
 from boto3 import resource
 from util import log_error, post_to_connection
@@ -19,7 +19,7 @@ def handler(event, context):
         except ClientError as e:
             log_error(e) 
             return {"statusCode": 500}
-        post_to_connection({"sessionCode": code}, con_id, code, domain)
+        post_to_connection({"action": "createdSession", "sessionCode": code}, con_id, code, domain)
         return {"statusCode": 201}
     except Exception as e:
         log_error(e)
