@@ -22,7 +22,6 @@ def post_to_connection(data, con_id, session_code, domain, session_tbl=boto3.res
             ExpressionAttributeValues={ ":con_id": set([con_id])}
         )
 
-
 def get_session(session_code, session_tbl=boto3.resource("dynamodb").Table("session-v1")):
     if session_code == None: return False, None
     try:
@@ -30,5 +29,5 @@ def get_session(session_code, session_tbl=boto3.resource("dynamodb").Table("sess
         if session == None: return False, None
         return True, session
     except ClientError as e:
-        # TODO figure out logging
+        log_error(e)
         return False, None

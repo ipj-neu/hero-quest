@@ -22,11 +22,6 @@ provider:
             - events:*
             - cloudwatch:*
           Resource: "*"
-        - Effect: Allow
-          Action:
-            - "execute-api:ManageConnections"
-          Resource: 
-            - "arn:aws:execute-api:*:*:**/@connections/*"
 
 package:
   individually: true
@@ -114,12 +109,3 @@ custom:
       package:
         exclude:
           - "*/boto3/examples/*"
-  cores:
-    origin: "*"
-    headers:
-      - Content-Type
-      - X-Amz-Date
-      - Authorization
-      - X-Api-Key
-      - X-Amz-Security
-      - X-Amz-User-Agent
