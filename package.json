@@ -9,6 +9,7 @@
     "serverless-python-requirements": "^6.0.0"
   },
   "dependencies": {
+    "aws-amplify-serverless-plugin": "^1.4.1",
     "serverless": "^3.33.0"
   }
 }
